@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import './styled.css';
-import useOnePerson from '../../../peopleHook/useOnePerson';
+import useOnePerson from '../../../hook/useOnePerson';
 
 function Details() {
   const nav = useNavigate();

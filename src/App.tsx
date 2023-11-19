@@ -1,16 +1,16 @@
+import { Provider } from 'react-redux';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import MainLayout from './components/MainLayout';
-import { PeopleProvider } from './Context/peopleContext';
-import { SearchProvider } from './Context/searchContext';
+import { setUpSwStore } from './store/swstore';
+
+const store = setUpSwStore();
 
 function App() {
   return (
     <ErrorBoundary>
-      <SearchProvider>
-        <PeopleProvider>
-          <MainLayout />
-        </PeopleProvider>
-      </SearchProvider>
+      <Provider store={store}>
+        <MainLayout />
+      </Provider>
     </ErrorBoundary>
   );
 }

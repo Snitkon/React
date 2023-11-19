@@ -1,47 +1,43 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 import './styled.css';
 import LimitSwitcher from '../LimitSwitcher/LimitSwitcher';
-import PageNumber from './Number/Number';
+import Buttons from './Buttons/Buttons';
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
+import { limitSlice } from '../../store/reducers/limitSlice';
+import { pageSlice } from '../../store/reducers/pageSlice';
 
 type Props = {
   totalPage: number;
-  limit: number;
-  switchPage: (value: number) => void;
-  switchLimit: (value: number) => void;
 };
 
-function Pagination({ totalPage, limit, switchLimit, switchPage }: Props) {
-  const [pages, setPages] = useState<number[]>([]);
-  const countPage = Math.ceil(totalPage / limit);
+function Pagination({ totalPage }: Props) {
+  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    const page = new Array(countPage);
-    for (let i = 1; i <= countPage; i++) {
-      page.push(i);
-    }
-    setPages(page);
-  }, [countPage]);
+  const { limit } = useAppSelector((state) => state.limitReducer);
+  const { changeStateLimit } = limitSlice.actions;
+
+  const { page } = useAppSelector((state) => state.pageReducer);
+  const { changeStatePage } = pageSlice.actions;
+  const countPage = Math.ceil(totalPage / limit);
 
   const changeLimit = (event: ChangeEvent<HTMLSelectElement>) => {
     const limit = Number(event.target.value);
-    switchLimit(limit);
-    const page = new Array(countPage);
-    for (const i in page) {
-      page.push(i + 1);
-    }
-    setPages(page);
+    dispatch(changeStateLimit(limit));
   };
 
   const switchedPage = (value: number) => {
-    switchPage(value);
+    changeStatePage(value);
   };
 
   return (
     <div className="pagination_container">
       <LimitSwitcher limit={limit} switcher={changeLimit} />
-      {pages.map((item: number, i) => (
-        <PageNumber value={item} key={i} click={switchedPage} />
-      ))}
+      <Buttons
+        currentPage={page}
+        prevClick={switchedPage}
+        nextClick={switchedPage}
+        countPage={countPage}
+      />
     </div>
   );
 }

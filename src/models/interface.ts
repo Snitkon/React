@@ -7,6 +7,12 @@ export interface IData<T> {
   results: T[];
 }
 
+export interface IResponse<T> {
+  data: IData<T>;
+  isLoading: boolean;
+  isError: boolean;
+}
+
 export interface IPerson {
   name: string;
   height: string;
@@ -23,3 +29,5 @@ export interface ErrorProps {
 export const enum ResourcesType {
   People = 'people',
 }
+
+export type Params = string | number;

@@ -1,13 +1,11 @@
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import './styled.css';
-import { SearchContext } from '../../Context/searchContext';
 
 type Props = {
   click: (value: string) => void;
 };
 
 function Search({ click }: Props) {
-  const request = useContext(SearchContext);
   const text = useRef<HTMLInputElement>(null);
 
   const clickButtonSearch = () => {
@@ -23,7 +21,7 @@ function Search({ click }: Props) {
           className="input form-control me-sm-2"
           placeholder="Search"
           type="text"
-          defaultValue={request}
+          // defaultValue={request}
         />
         <button
           type="button"
