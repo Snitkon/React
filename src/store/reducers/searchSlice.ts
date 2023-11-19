@@ -8,14 +8,14 @@ const initialState: IState = {
   searchRequest: getLocalStorage(),
 };
 
-const searchSlice = createSlice({
+export const searchSlice = createSlice({
   name: 'SEARCH',
   initialState,
   reducers: {
-    changeStateSearch(state, action: PayloadAction<string>) {
+    changeStateSearch: (state, action: PayloadAction<string>) => {
       state.searchRequest = action.payload;
     },
-    changeStateClear(state) {
+    changeStateClear: (state) => {
       state.searchRequest = '';
     },
   },

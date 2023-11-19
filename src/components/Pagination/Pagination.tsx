@@ -18,6 +18,7 @@ function Pagination({ totalPage }: Props) {
 
   const { page } = useAppSelector((state) => state.pageReducer);
   const { changeStatePage } = pageSlice.actions;
+
   const countPage = Math.ceil(totalPage / limit);
 
   const changeLimit = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -26,7 +27,7 @@ function Pagination({ totalPage }: Props) {
   };
 
   const switchedPage = (value: number) => {
-    changeStatePage(value);
+    dispatch(changeStatePage(value));
   };
 
   return (

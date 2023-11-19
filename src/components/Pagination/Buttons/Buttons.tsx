@@ -11,6 +11,7 @@ function Buttons({ currentPage, prevClick, nextClick, countPage }: Props) {
   return (
     <>
       <button
+        className="btn btn-secondary"
         disabled={currentPage <= 1}
         onClick={() => prevClick(currentPage - 1)}
         type="button"
@@ -19,6 +20,7 @@ function Buttons({ currentPage, prevClick, nextClick, countPage }: Props) {
       </button>
       <span>{currentPage}</span>
       <button
+        className="btn btn-secondary"
         disabled={currentPage >= countPage}
         onClick={() => nextClick(currentPage + 1)}
         type="button"

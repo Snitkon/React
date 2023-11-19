@@ -10,21 +10,16 @@ import { useAppDispatch, useAppSelector } from '../../hook/redux';
 type Props = {
   data: IPerson[];
   loader: boolean;
-  limit: number;
+  error: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function Cards({ data, loader, limit }: Props) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { opened } = useAppSelector((state) => state.detailsReducer);
+function Cards({ data, loader, error }: Props) {
+  const { StoreLoader } = useAppSelector((state) => state.loaderReducer);
   const { changeState } = openedSlice.actions;
   const dispatch = useAppDispatch();
-  // const peopleData = useContext(PeopleContext);
-  /* if (data.length) {
-    data.length = limit;
-  } */
 
-  if (loader) return <p>Loading...</p>;
+  if (loader || StoreLoader) return <p>Loading...</p>;
+  if (error) return <p>Not Results</p>;
 
   return (
     <>

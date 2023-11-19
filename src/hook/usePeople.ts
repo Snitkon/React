@@ -1,48 +1,45 @@
-import { useEffect, useRef, useState } from 'react';
-import { IPerson, IResponse, Params } from '../models/interface';
-import { useLazyPeopleQuery, useLazySearchQuery } from '../store/sw/sw.api';
-import { setLocalStorage } from '../api/localStorage';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useRef } from 'react';
+import { IPerson } from '../models/interface';
+import { useAppDispatch, useAppSelector } from './redux';
+import { usePeopleQuery } from '../store/sw/sw.api';
+import { loaderSlice } from '../store/reducers/loaderSlice';
 
-function usePeople(params: Params) {
-  const [getPeople, { isFetching: peopleFetch }] = useLazyPeopleQuery();
-  const [searchPeople, { isFetching: searchFetch }] = useLazySearchQuery();
-  const [data, setData] = useState<IPerson[]>([]);
-  const loader = peopleFetch || searchFetch;
+function usePeople() {
+  const dispatch = useAppDispatch();
+  const { StoreLoader } = useAppSelector((state) => state.loaderReducer);
+  const { changeStateLoader } = loaderSlice.actions;
+  const maxResult = useRef<number>(0);
+  const peopleData = useRef<IPerson[]>([]);
+  const loader = useRef<boolean>(false);
   const error = useRef<boolean>(false);
-  const maxResult = useRef(0);
+  const { searchRequest } = useAppSelector((state) => state.searchReducer);
+  const { page } = useAppSelector((state) => state.pageReducer);
+  const { limit } = useAppSelector((state) => state.limitReducer);
+  const urlParams = new URLSearchParams();
+  if (page) urlParams.append('page', String(page));
+  if (searchRequest) urlParams.append('search', searchRequest);
+  if (limit) urlParams.append('limit', String(limit));
+  const { data, isLoading, isError, isFetching } = usePeopleQuery(
+    String(urlParams)
+  );
+  peopleData.current = data?.results as IPerson[];
+  loader.current = isLoading;
+  error.current = isError;
+  maxResult.current = data?.count as number;
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (typeof params === 'number') {
-        try {
-          setLocalStorage(params.toString());
-          const results = await getPeople(params);
-          const { data, isError } = results as IResponse<IPerson>;
-          setData(data.results);
-          error.current = isError;
-          maxResult.current = data.count;
-        } catch (e) {
-          console.error('Not valid: ', (e as Error).message);
-        }
-      }
-      if (typeof params === 'string') {
-        try {
-          setLocalStorage(params);
-          const results = await searchPeople(params);
-          const { data, isError } = results as IResponse<IPerson>;
-          setData(data.results);
-          error.current = isError;
-          maxResult.current = data.count;
-        } catch (e) {
-          console.error('Not valid: ', (e as Error).message);
-        }
-      }
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
+    dispatch(changeStateLoader(isFetching));
+  }, [isFetching]);
 
-  return [data, loader, maxResult.current] as const;
+  console.log('CHANGE STORE: ', StoreLoader);
+
+  return [
+    peopleData.current,
+    loader.current,
+    error.current,
+    maxResult.current,
+  ] as const;
 }
 
 export default usePeople;

@@ -4,12 +4,14 @@ import detailsReducer from './reducers/detailsSlice';
 import limitReducer from './reducers/limitSlice';
 import searchReducer from './reducers/searchSlice';
 import pageReducer from './reducers/pageSlice';
+import loaderReducer from './reducers/loaderSlice';
 
 const rootReducer = combineReducers({
   detailsReducer,
   limitReducer,
   searchReducer,
   pageReducer,
+  loaderReducer,
   [swApi.reducerPath]: swApi.reducer,
 });
 

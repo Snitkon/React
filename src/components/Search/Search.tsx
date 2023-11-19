@@ -1,16 +1,24 @@
 import { useRef } from 'react';
 import './styled.css';
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
+import { searchSlice } from '../../store/reducers/searchSlice';
+import { useSearchParams } from 'react-router-dom';
+import { setLocalStorage } from '../../api/localStorage';
 
-type Props = {
-  click: (value: string) => void;
-};
-
-function Search({ click }: Props) {
+function Search() {
+  const dispatch = useAppDispatch();
+  const { searchRequest } = useAppSelector((state) => state.searchReducer);
+  const { changeStateSearch } = searchSlice.actions;
   const text = useRef<HTMLInputElement>(null);
+  const [param, setParam] = useSearchParams();
+  console.log(param.values);
 
   const clickButtonSearch = () => {
     const value = text.current?.value || '';
-    click(value.trim());
+    dispatch(changeStateSearch(value.trim()));
+    setLocalStorage(value);
+    param.delete('page');
+    setParam(param);
   };
 
   return (
@@ -21,7 +29,7 @@ function Search({ click }: Props) {
           className="input form-control me-sm-2"
           placeholder="Search"
           type="text"
-          // defaultValue={request}
+          defaultValue={searchRequest}
         />
         <button
           type="button"
