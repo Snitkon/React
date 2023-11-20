@@ -17,8 +17,14 @@ function usePeople() {
   const { page } = useAppSelector((state) => state.pageReducer);
   const { limit } = useAppSelector((state) => state.limitReducer);
   const urlParams = new URLSearchParams();
-  if (page) urlParams.append('page', String(page));
-  if (searchRequest) urlParams.append('search', searchRequest);
+  if (page) {
+    urlParams.delete('search');
+    urlParams.append('page', String(page));
+  }
+  if (searchRequest) {
+    urlParams.delete('page');
+    urlParams.append('search', searchRequest);
+  }
   if (limit) urlParams.append('limit', String(limit));
   const { data, isLoading, isError, isFetching } = usePeopleQuery(
     String(urlParams)

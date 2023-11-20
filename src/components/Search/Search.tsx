@@ -4,21 +4,23 @@ import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { searchSlice } from '../../store/reducers/searchSlice';
 import { useSearchParams } from 'react-router-dom';
 import { setLocalStorage } from '../../api/localStorage';
+import { pageSlice } from '../../store/reducers/pageSlice';
 
 function Search() {
   const dispatch = useAppDispatch();
   const { searchRequest } = useAppSelector((state) => state.searchReducer);
   const { changeStateSearch } = searchSlice.actions;
+  const { changeStatePage } = pageSlice.actions;
   const text = useRef<HTMLInputElement>(null);
   const [param, setParam] = useSearchParams();
-  console.log(param.values);
 
   const clickButtonSearch = () => {
     const value = text.current?.value || '';
-    dispatch(changeStateSearch(value.trim()));
     setLocalStorage(value);
+    changeStatePage(1);
+    dispatch(changeStateSearch(value.trim()));
     param.delete('page');
-    setParam(param);
+    setParam({ search: value });
   };
 
   return (

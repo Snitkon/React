@@ -1,8 +1,6 @@
 import './styled.css';
 import Person from './Person/Person';
 import { Link, Outlet } from 'react-router-dom';
-/* import { useContext } from 'react';
-import { PeopleContext } from '../../Context/peopleContext'; */
 import { IPerson } from '../../models/interface';
 import { openedSlice } from '../../store/reducers/detailsSlice';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';

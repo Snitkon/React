@@ -17,15 +17,7 @@ export const swApi = createApi({
     person: build.query<IPerson, number>({
       query: (id: number) => `api/people/${id}`,
     }),
-    /* search: build.query<IData<IPerson>, string>({
-      query: (search: string) => ({
-        url: 'api/people',
-        params: {
-          search: search,
-        },
-      }),
-    }), */
   }),
 });
 
-export const { useLazyPeopleQuery, useLazyPersonQuery, usePeopleQuery } = swApi;
+export const { usePeopleQuery, usePersonQuery } = swApi;
