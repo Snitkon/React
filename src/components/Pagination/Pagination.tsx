@@ -2,39 +2,31 @@ import { ChangeEvent } from 'react';
 import './styled.css';
 import LimitSwitcher from '../LimitSwitcher/LimitSwitcher';
 import Buttons from './Buttons/Buttons';
-import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { limitSlice } from '../../store/reducers/limitSlice';
-import { pageSlice } from '../../store/reducers/pageSlice';
-import { useSearchParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import { getQueryParams } from '../queryParams';
 
 type Props = {
   totalPage: number;
 };
 
 function Pagination({ totalPage }: Props) {
-  const dispatch = useAppDispatch();
-
-  const { limit } = useAppSelector((state) => state.limitReducer);
-  const { changeStateLimit } = limitSlice.actions;
-
-  const { page } = useAppSelector((state) => state.pageReducer);
-  const { changeStatePage } = pageSlice.actions;
-
+  const router = useRouter();
+  const { page, limit } = getQueryParams(router.query);
   const countPage = Math.ceil(totalPage / limit);
-  const [param, setParam] = useSearchParams();
 
   const changeLimit = (event: ChangeEvent<HTMLSelectElement>) => {
     const limit = Number(event.target.value);
-    dispatch(changeStateLimit(limit));
-    dispatch(changeStatePage(1));
-    param.delete('page');
-    setParam(param);
+    router.push({
+      pathname: '/',
+      query: { limit: limit },
+    });
   };
 
   const switchedPage = (value: number) => {
-    param.delete('search');
-    dispatch(changeStatePage(value));
-    setParam({ page: String(value) });
+    router.push({
+      pathname: '/',
+      query: { page: value },
+    });
   };
 
   return (

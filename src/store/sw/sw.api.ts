@@ -29,7 +29,5 @@ export const swApi = createApi({
 export const { people, person } = swApi.endpoints;
 
 export const {
-  usePeopleQuery,
-  usePersonQuery,
   util: { getRunningQueriesThunk },
 } = swApi;

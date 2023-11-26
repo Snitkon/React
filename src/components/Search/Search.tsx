@@ -1,26 +1,23 @@
 import { useRef } from 'react';
 import './styled.css';
-import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { searchSlice } from '../../store/reducers/searchSlice';
-import { useSearchParams } from 'react-router-dom';
-import { setLocalStorage } from '../../api/localStorage';
-import { pageSlice } from '../../store/reducers/pageSlice';
+import { useRouter } from 'next/router';
+import { getQueryParams } from '../queryParams';
+// import { useSearchParams } from 'next/navigation';
 
 function Search() {
-  const dispatch = useAppDispatch();
-  const { searchRequest } = useAppSelector((state) => state.searchReducer);
-  const { changeStateSearch } = searchSlice.actions;
-  const { changeStatePage } = pageSlice.actions;
+  const router = useRouter();
   const text = useRef<HTMLInputElement>(null);
-  const [param, setParam] = useSearchParams();
+  // const [param, setParam] = useSearchParams();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { search } = getQueryParams(router.query);
 
   const clickButtonSearch = () => {
-    const value = text.current?.value || '';
-    setLocalStorage(value);
-    changeStatePage(1);
-    dispatch(changeStateSearch(value.trim()));
-    param.delete('page');
-    setParam({ search: value });
+    const value = text.current?.value.trim() || '';
+    // param.delete('page');
+    router.push({
+      pathname: '/',
+      query: { search: value },
+    });
   };
 
   return (
@@ -31,7 +28,7 @@ function Search() {
           className="input form-control me-sm-2"
           placeholder="Search"
           type="text"
-          defaultValue={searchRequest}
+          defaultValue={search}
         />
         <button
           type="button"

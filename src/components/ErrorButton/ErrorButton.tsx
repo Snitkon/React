@@ -11,7 +11,7 @@ function ErrorButton() {
   };
 
   if (error) {
-    throw Error('This is ERROR');
+    throw new Error('This is ERROR');
   }
 
   return (
