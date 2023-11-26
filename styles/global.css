@@ -1,0 +1,21 @@
+@import '../node_modules/bootswatch/dist/sketchy/bootstrap.min.css';
+@import '../src/components/Cards/styled.css';
+@import '../src/components/Cards/Details/styled.css';
+@import '../src/components/Cards/Person/styled.css';
+@import '../src/components/Pagination/styled.css';
+@import '../src/components/Pagination/Buttons/styled.css';
+@import '../src/components/Search/styled.css';
+
+#root {
+  padding: 15px;
+}
+
+p {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
