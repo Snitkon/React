@@ -1,18 +1,24 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IData, IPerson } from '../../models/interface';
+import { HYDRATE } from 'next-redux-wrapper';
 
 export const swApi = createApi({
   reducerPath: 'people/api',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://swapi.dev/',
   }),
-  tagTypes: ['People'],
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
+  tagTypes: ['SWPeople'],
   endpoints: (build) => ({
     people: build.query<IData<IPerson>, string>({
       query: (item: string) => ({
         url: `api/people/?${item}`,
       }),
-      providesTags: ['People'],
+      providesTags: ['SWPeople'],
     }),
     person: build.query<IPerson, number>({
       query: (id: number) => `api/people/${id}`,
@@ -20,4 +26,10 @@ export const swApi = createApi({
   }),
 });
 
-export const { usePeopleQuery, usePersonQuery } = swApi;
+export const { people, person } = swApi.endpoints;
+
+export const {
+  usePeopleQuery,
+  usePersonQuery,
+  util: { getRunningQueriesThunk },
+} = swApi;

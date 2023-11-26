@@ -15,6 +15,7 @@ export default defineConfig({
     coverage: {
       include: ['src'],
       exclude: [
+        'src/store',
         'src/App.tsx',
         'src/main.tsx',
         'src/modules',
