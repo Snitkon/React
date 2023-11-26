@@ -1,4 +1,3 @@
-import './styled.css';
 import { useState } from 'react';
 
 function ErrorButton() {
@@ -11,7 +10,7 @@ function ErrorButton() {
   };
 
   if (error) {
-    throw new Error('This is ERROR');
+    throw Error('This is ERROR');
   }
 
   return (

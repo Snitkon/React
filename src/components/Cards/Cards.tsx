@@ -1,16 +1,14 @@
-import './styled.css';
 import Person from './Person/Person';
 import { IPerson } from '../../models/interface';
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Router, useRouter } from 'next/router';
 import Link from 'next/link';
 
 type Props = {
   data: IPerson[];
-  children: ReactNode;
 };
 
-function Cards({ data, children }: Props) {
+function Cards({ data }: Props) {
   const [loader, setLoader] = useState<boolean>(false);
 
   useEffect(() => {
@@ -48,7 +46,7 @@ function Cards({ data, children }: Props) {
           <p key="not_found">Not found</p>
         )}
       </div>
-      <div>{children}</div>
+      <div></div>
     </>
   );
 }

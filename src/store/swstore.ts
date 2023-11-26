@@ -1,17 +1,15 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { swApi } from './sw/sw.api';
-
-const rootReducer = combineReducers({
-  [swApi.reducerPath]: swApi.reducer,
-});
+import { createWrapper } from 'next-redux-wrapper';
 
 export const setUpSwStore = () => {
   return configureStore({
-    reducer: rootReducer,
+    reducer: { [swApi.reducerPath]: swApi.reducer },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(swApi.middleware),
   });
 };
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<AppStore['getState']>;
 export type AppStore = ReturnType<typeof setUpSwStore>;
 export type AppDispatch = AppStore['dispatch'];
+export const container = createWrapper(setUpSwStore);

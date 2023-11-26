@@ -1,5 +1,3 @@
-// import { Component, ReactNode } from 'react';
-import './styled.css';
 import { IPerson } from '../../../models/interface';
 
 type Props = {

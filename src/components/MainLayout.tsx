@@ -1,18 +1,16 @@
 import ErrorButton from './ErrorButton/ErrorButton';
-import Pagination from './Pagination/Pagination';
-import usePeople from '../hook/usePeople';
-import Cards from './Cards/Cards';
+// import Pagination from './Pagination/Pagination';
+// import Cards from './Cards/Cards';
 import Search from './Search/Search';
+// import Details from './Cards/Details/Details';
 
 function MainLayout() {
-  const [result, loader, error, maxResult] = usePeople();
-
   return (
     <div className="container">
       <Search />
       <ErrorButton />
-      <Cards error={error} data={result} loader={loader} />
-      <Pagination totalPage={maxResult} />
+      {/* <Cards data={result} /> */}
+      {/* <Pagination totalPage={maxResult} /> */}
     </div>
   );
 }

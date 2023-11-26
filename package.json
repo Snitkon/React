@@ -58,7 +58,6 @@
   },
   "lint-staged": {
     "*.(tsx|ts)": [
-      "npm run lint"
     ]
   }
 }

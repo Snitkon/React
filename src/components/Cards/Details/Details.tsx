@@ -1,15 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import './styled.css';
-import useOnePerson from '../../../hook/useOnePerson';
-
 function Details() {
-  const nav = useNavigate();
-  const { id } = useParams();
-  const personId = Number(id);
+  /*  const personId = 2;
   const propsData = {
     id: personId,
   };
-  const [loader, data] = useOnePerson({ propsData });
 
   return (
     <div className="detail_container alert alert-dismissible alert-success">
@@ -36,10 +29,15 @@ function Details() {
             type="button"
             className="btn-close"
             data-bs-dismiss="alert"
-            onClick={() => nav(`/${location.search}`)}
+            onClick={() => console.log('hi')}
           />
         </>
       )}
+    </div>
+  ); */
+  return (
+    <div className="detail_container">
+      <span>Details</span>
     </div>
   );
 }

@@ -1,5 +1,3 @@
-import './styled.css';
-
 type Props = {
   currentPage: number;
   prevClick: (value: number) => void;

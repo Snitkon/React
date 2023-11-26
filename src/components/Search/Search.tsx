@@ -1,19 +1,15 @@
 import { useRef } from 'react';
-import './styled.css';
 import { useRouter } from 'next/router';
 import { getQueryParams } from '../queryParams';
-// import { useSearchParams } from 'next/navigation';
 
 function Search() {
   const router = useRouter();
   const text = useRef<HTMLInputElement>(null);
-  // const [param, setParam] = useSearchParams();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { search } = getQueryParams(router.query);
 
   const clickButtonSearch = () => {
     const value = text.current?.value.trim() || '';
-    // param.delete('page');
     router.push({
       pathname: '/',
       query: { search: value },

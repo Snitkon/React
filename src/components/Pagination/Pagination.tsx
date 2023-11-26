@@ -1,5 +1,4 @@
 import { ChangeEvent } from 'react';
-import './styled.css';
 import LimitSwitcher from '../LimitSwitcher/LimitSwitcher';
 import Buttons from './Buttons/Buttons';
 import { useRouter } from 'next/router';
