@@ -13,3 +13,11 @@ export interface IForm {
 export interface ICountry {
   name: string;
 }
+
+export interface IFormSlice extends Omit<IForm, 'image'> {
+  image: {
+    size: number;
+    type: string;
+    base64: string;
+  };
+}
