@@ -19,9 +19,9 @@ export default function Forms() {
             </div>
             <p>Name: {form.name}</p>
             <p>Age: {form.age}</p>
-            <p>Gender: {form.gender}</p>
             <p>Country: {form.country}</p>
             <p>Email: {form.email}</p>
+            <p>Gender: {form.gender}</p>
             <p>Password: {form.password}</p>
             <p>Consent: {form.agreement ? 'true' : 'false'}</p>
           </li>

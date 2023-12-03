@@ -4,7 +4,7 @@ import Countries from '../../Countries';
 import type { LegacyRef } from 'react';
 import { useAppSelector } from '../../../store/redux';
 
-const TextBlock = (
+const ListBlock = (
   { error, id, title, name }: IInput,
   ref: LegacyRef<HTMLInputElement>
 ) => {
@@ -22,6 +22,7 @@ const TextBlock = (
           list={`${id}${name}`}
           ref={ref}
           defaultValue=""
+          autoComplete="off"
         />
       </fieldset>
       <Countries id={`${id}${name}`} countries={countries} />
@@ -29,5 +30,5 @@ const TextBlock = (
   );
 };
 
-const Text = forwardRef(TextBlock);
-export default Text;
+const List = forwardRef(ListBlock);
+export default List;

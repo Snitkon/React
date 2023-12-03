@@ -12,7 +12,7 @@ export const formSlice = createSlice({
       reducer(state, actions: PayloadAction<IFormSlice>) {
         state.push(actions.payload);
       },
-      prepare(form: Omit<IFormSlice, ''>) {
+      prepare(form: IFormSlice) {
         return {
           payload: {
             ...form,

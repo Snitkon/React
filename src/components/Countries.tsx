@@ -11,11 +11,7 @@ const Countries = ({ id, countries }: Props) => {
       {country.name}
     </option>
   ));
-  return (
-    <>
-      <select id={id}>{selectOptions}</select>
-    </>
-  );
+  return <datalist id={id}>{selectOptions}</datalist>;
 };
 
 export default Countries;

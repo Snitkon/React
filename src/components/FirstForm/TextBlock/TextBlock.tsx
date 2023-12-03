@@ -10,7 +10,14 @@ const TextBlock = (
     <fieldset>
       <legend>{error}</legend>
       <label htmlFor={id}>{title}</label>
-      <input id={id} name={name} type="text" ref={ref} defaultValue="" />
+      <input
+        id={id}
+        name={name}
+        type="text"
+        ref={ref}
+        defaultValue=""
+        autoComplete="off"
+      />
     </fieldset>
   );
 };

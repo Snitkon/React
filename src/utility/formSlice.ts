@@ -1,4 +1,5 @@
-import type { FormSchema, SliceForm } from '../types';
+import { IFormSlice } from '../models/interface';
+import { FormChart } from './formChart';
 
 const get64 = (file: File): Promise<string> => {
   return new Promise((resolve) => {
@@ -8,7 +9,7 @@ const get64 = (file: File): Promise<string> => {
   });
 };
 
-const getForm = async (data: FormSchema) => {
+const getForm = async (data: FormChart) => {
   const img = data.image[0];
   const base64 = await get64(img);
 
@@ -19,7 +20,7 @@ const getForm = async (data: FormSchema) => {
       size: img.size,
       base64,
     },
-  } as SliceForm;
+  } as IFormSlice;
 };
 
 export default getForm;

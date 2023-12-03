@@ -10,7 +10,14 @@ const EmailBlock = (
     <fieldset>
       <legend>{error}</legend>
       <label htmlFor={id}>{title}</label>
-      <input id={id} name={name} type="email" ref={ref} defaultValue="" />
+      <input
+        id={id}
+        name={name}
+        type="email"
+        ref={ref}
+        defaultValue=""
+        autoComplete="off"
+      />
     </fieldset>
   );
 };
