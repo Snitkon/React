@@ -2,7 +2,7 @@ import FormsPage from './FormsPage';
 
 import { Link } from 'react-router-dom';
 
-export default function Main() {
+const MainPage = () => {
   return (
     <>
       <main>
@@ -18,4 +18,6 @@ export default function Main() {
       </div>
     </>
   );
-}
+};
+
+export default MainPage;

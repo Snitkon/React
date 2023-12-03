@@ -1,7 +1,8 @@
 import { useAppSelector } from '../store/redux';
+import { RootState } from '../store/store';
 
 export default function Forms() {
-  const forms = useAppSelector((state) => state.formReducer);
+  const forms = useAppSelector((state: RootState) => state.formReducer);
 
   return (
     <ul>

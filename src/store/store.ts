@@ -7,12 +7,14 @@ const rootReducer = combineReducers({
   formReducer,
 });
 
-export const store = () => {
+export const setStore = () => {
   return configureStore({
     reducer: rootReducer,
   });
 };
 
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof store>;
+const store = setStore();
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppStore = ReturnType<typeof setStore>;
 export type AppDispatch = AppStore['dispatch'];

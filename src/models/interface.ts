@@ -1,3 +1,5 @@
+import { InputHTMLAttributes, MutableRefObject } from 'react';
+
 export interface IForm {
   name: string;
   age: number;
@@ -21,3 +23,21 @@ export interface IFormSlice extends Omit<IForm, 'image'> {
     base64: string;
   };
 }
+
+export interface IInput
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ''> {
+  title: string;
+  error: string;
+  meter?: boolean;
+}
+
+type Props = {
+  error: string;
+  input: Array<{
+    id: string;
+    title: string;
+    defaultValue: string;
+  }>;
+  gender: MutableRefObject<string>;
+};
+export type IInputRadioProps = Props & InputHTMLAttributes<HTMLInputElement>;
