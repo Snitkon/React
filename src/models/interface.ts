@@ -1,4 +1,6 @@
 import { InputHTMLAttributes, MutableRefObject } from 'react';
+import { FormChart } from '../utility/formChart';
+import { Control, UseFormRegister } from 'react-hook-form';
 
 export interface IForm {
   name: string;
@@ -41,3 +43,24 @@ type Props = {
   gender: MutableRefObject<string>;
 };
 export type IInputRadioProps = Props & InputHTMLAttributes<HTMLInputElement>;
+
+export interface IInputSecond
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ''> {
+  id: string;
+  name: keyof FormChart;
+  title: string;
+  error: string | undefined;
+  register: UseFormRegister<FormChart>;
+  control?: Control<FormChart>;
+}
+
+export interface IRadioSecond
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ''> {
+  input: Array<{
+    id: string;
+    title: string;
+  }>;
+  error: string | undefined;
+  name: keyof FormChart;
+  register: UseFormRegister<FormChart>;
+}

@@ -13,7 +13,7 @@ import List from './ListBlock/ListBlock';
 import Image from './ImageBlock/ImageBlock';
 import Email from './EmailBlock/EmailBlock';
 import Password from './PasswordBlock/PasswordBlock';
-import Checkbox from './CheckboxBlock/checboxBlock';
+import Checkbox from './CheckboxBlock/CheckboxBlock';
 import { useAppDispatch } from '../../store/redux';
 
 const FirstForm = () => {
